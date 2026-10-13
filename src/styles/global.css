@@ -1,0 +1,87 @@
+@import "tailwindcss";
+@import "@fontsource/exo/400.css";
+@import "@fontsource/exo/500.css";
+@import "@fontsource/exo/600.css";
+@import "@fontsource/exo/700.css";
+@import "@fontsource/exo/800.css";
+@import "@fontsource/exo/900.css";
+@import "@fontsource/unbounded/400.css";
+@import "@fontsource/unbounded/600.css";
+@import "@fontsource/unbounded/700.css";
+@import "@fontsource/unbounded/800.css";
+@import "@fontsource/unbounded/900.css";
+
+@theme {
+  --color-mololo-red: #e01a31;
+  --color-mololo-cream: #fff1d9;
+  --color-mololo-black: #000000;
+  --color-mololo-white: #ffffff;
+  --color-mololo-dark: #111111;
+  --color-mololo-muted: #595349;
+  --color-mololo-sand: #f4e3c7;
+  --color-mololo-border: rgba(0, 0, 0, 0.12);
+  --color-mololo-darkborder: rgba(255, 255, 255, 0.15);
+
+  --font-sans: 'Exo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Unbounded', 'Exo', sans-serif;
+}
+
+:root {
+  --bg-primary: #fff1d9;
+  --text-primary: #000000;
+  --brand-red: #e01a31;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Grilles & Lignes éditoriales inspirées de Pan African Music (PAM) */
+.pam-border-b {
+  border-bottom: 1.5px solid #000000;
+}
+
+.pam-border-t {
+  border-top: 1.5px solid #000000;
+}
+
+.pam-border-r {
+  border-right: 1.5px solid #000000;
+}
+
+.pam-border-l {
+  border-left: 1.5px solid #000000;
+}
+
+.pam-border {
+  border: 1.5px solid #000000;
+}
+
+/* Typographie éditoriale d'impact */
+.font-display {
+  font-family: 'Unbounded', 'Exo', sans-serif;
+}
+
+/* Animations légères */
+.transition-editorial {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #fff1d9;
+}
+::-webkit-scrollbar-thumb {
+  background: #e01a31;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}

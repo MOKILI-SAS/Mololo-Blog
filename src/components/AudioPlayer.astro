@@ -1,0 +1,162 @@
+---
+// Audio Player & Lecteur Spotify intégré pour MOLOLO playlist
+---
+
+<div 
+  id="mololo-audio-player" 
+  class="fixed bottom-0 left-0 right-0 z-40 bg-black text-[#fff1d9] border-t-2 border-[#e01a31] shadow-2xl transition-all duration-300"
+>
+  <!-- Main Compact Player Bar -->
+  <div class="max-w-7xl mx-auto px-4 py-2.5 flex items-center justify-between gap-4">
+    
+    <!-- Left: Track info & Curator avatar -->
+    <div class="flex items-center gap-3 min-w-0">
+      <div class="relative w-10 h-10 rounded-full overflow-hidden shrink-0 border border-white/20 bg-[#e01a31]">
+        <img 
+          src="/images/slimito-avatar.png" 
+          alt="SLIMITO" 
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <div class="min-w-0">
+        <div class="flex items-center gap-2">
+          <!-- Exact Name: MOLOLO playlist -->
+          <span class="text-[9px] font-display font-extrabold uppercase px-1.5 py-0.2 bg-[#e01a31] text-white tracking-widest">
+            MOLOLO playlist
+          </span>
+          <span id="player-status" class="text-[10px] text-white/60 uppercase font-mono">
+            Sélection SLIMITO (du 243 au 242)
+          </span>
+        </div>
+        <p id="player-title" class="font-display font-bold text-xs truncate text-[#fff1d9]">
+          Des artistes à découvrir ou redécouvrir du 243 à 242
+        </p>
+      </div>
+    </div>
+
+    <!-- Center: Play/Pause circular button for direct Spotify playback in site -->
+    <div class="flex items-center gap-3 shrink-0">
+      <button 
+        id="btn-toggle-spotify"
+        class="w-10 h-10 rounded-full bg-[#e01a31] text-white hover:bg-white hover:text-black hover:scale-105 active:scale-95 transition-all flex items-center justify-center shadow-md cursor-pointer"
+        aria-label="Lire la playlist"
+        title="Lire / Pause"
+      >
+        <svg id="icon-spotify-play" class="w-4 h-4 fill-current ml-0.5" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+        <svg id="icon-spotify-pause" class="w-4 h-4 fill-current hidden" viewBox="0 0 24 24">
+          <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+      </button>
+
+      <!-- Waveform Animation Indicator -->
+      <div id="audio-bars" class="hidden sm:flex items-end gap-1 h-4 opacity-40">
+        <span class="w-1 bg-[#e01a31] h-2 animate-pulse"></span>
+        <span class="w-1 bg-[#e01a31] h-4 animate-pulse delay-75"></span>
+        <span class="w-1 bg-[#e01a31] h-3 animate-pulse delay-150"></span>
+      </div>
+    </div>
+
+    <!-- Right: "Toutes les playlists" button which opens the selection modal -->
+    <div class="flex items-center gap-3 text-xs">
+      <button 
+        id="btn-open-modal-from-player" 
+        data-open-playlist-modal
+        class="inline-flex items-center gap-1.5 px-3 py-1 border border-white/30 rounded-full hover:border-[#e01a31] hover:bg-[#e01a31] hover:text-white text-xs font-bold uppercase transition-all cursor-pointer text-[#fff1d9]"
+      >
+        <span>Toutes les playlists</span>
+        <span class="text-xs">↗</span>
+      </button>
+
+      <button 
+        id="btn-close-player" 
+        class="p-1.5 text-white/50 hover:text-white cursor-pointer"
+        aria-label="Masquer le lecteur"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Expandable Spotify Embed Drawer (allows direct playback on site) -->
+  <div id="spotify-embed-container" class="hidden border-t border-white/15 bg-black/95 p-3 max-w-4xl mx-auto">
+    <div class="flex items-center justify-between pb-2 px-1">
+      <span class="text-[11px] font-display font-bold uppercase tracking-wider text-[#e01a31] flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-[#1DB954]"></span>
+        <span>Spotify Player — MOLOLO playlist</span>
+      </span>
+      <button id="btn-minimize-spotify" class="text-xs text-white/60 hover:text-white cursor-pointer font-mono">
+        ✕ Réduire
+      </button>
+    </div>
+    <iframe 
+      id="spotify-iframe"
+      style="border-radius:12px;" 
+      src="" 
+      data-src="https://open.spotify.com/embed/playlist/0Rj2DV5GbYSqlC8vXXtApS?utm_source=generator&theme=0" 
+      width="100%" 
+      height="152" 
+      frameBorder="0" 
+      allowfullscreen="" 
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+      loading="lazy"
+    ></iframe>
+  </div>
+</div>
+
+<script>
+  const btnToggle = document.getElementById('btn-toggle-spotify');
+  const embedContainer = document.getElementById('spotify-embed-container');
+  const spotifyIframe = document.getElementById('spotify-iframe') as HTMLIFrameElement;
+  const iconPlay = document.getElementById('icon-spotify-play');
+  const iconPause = document.getElementById('icon-spotify-pause');
+  const btnMinimize = document.getElementById('btn-minimize-spotify');
+  const btnClose = document.getElementById('btn-close-player');
+  const playerContainer = document.getElementById('mololo-audio-player');
+  const audioBars = document.getElementById('audio-bars');
+
+  let isPlayerOpen = false;
+
+  function toggleSpotify() {
+    if (!embedContainer || !spotifyIframe) return;
+    
+    isPlayerOpen = !isPlayerOpen;
+    if (isPlayerOpen) {
+      // Lazy load iframe source upon first click to optimize performance
+      if (!spotifyIframe.src && spotifyIframe.dataset.src) {
+        spotifyIframe.src = spotifyIframe.dataset.src;
+      }
+      embedContainer.classList.remove('hidden');
+      if (iconPlay) iconPlay.classList.add('hidden');
+      if (iconPause) iconPause.classList.remove('hidden');
+      if (audioBars) audioBars.classList.remove('opacity-40');
+    } else {
+      embedContainer.classList.add('hidden');
+      if (iconPlay) iconPlay.classList.remove('hidden');
+      if (iconPause) iconPause.classList.add('hidden');
+      if (audioBars) audioBars.classList.add('opacity-40');
+    }
+  }
+
+  if (btnToggle) {
+    btnToggle.addEventListener('click', toggleSpotify);
+  }
+
+  if (btnMinimize) {
+    btnMinimize.addEventListener('click', toggleSpotify);
+  }
+
+  window.addEventListener('toggle-spotify-player', () => {
+    if (!isPlayerOpen) toggleSpotify();
+  });
+
+  if (btnClose && playerContainer) {
+    btnClose.addEventListener('click', () => {
+      playerContainer.classList.add('translate-y-full');
+    });
+  }
+</script>

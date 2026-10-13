@@ -1,0 +1,594 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { getCollection } from 'astro:content';
+
+const allArticles = await getCollection('articles');
+const sortedArticles = allArticles.sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+
+const gridArticles = sortedArticles.slice(0, 6);
+
+// 4 Slides for dynamic Hero rotating every 5 seconds with integrated Video Player support
+const heroSlides = [
+  {
+    type: 'article',
+    title: "À Kinshasa, faire sonner le chaos : l'art brut de la transe urbaine",
+    image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1600&q=80",
+    ctaText: "Lire maintenant",
+    ctaHref: "/articles/kinshasa-bruits-futurs/",
+    isPlaylist: false,
+    isVideo: false,
+    videoUrl: ""
+  },
+  {
+    type: 'video',
+    title: "Mololo Session : Le battement secret de l'Assiko à Grand Yoff",
+    image: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
+    ctaText: "Regarder maintenant",
+    ctaHref: "#",
+    isPlaylist: false,
+    isVideo: true,
+    videoUrl: "https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?autoplay=1"
+  },
+  {
+    type: 'music',
+    title: "MOLOLO playlist : La sélection exclusive signée SLIMITO (du 243 au 242)",
+    image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=80",
+    ctaText: "Écouter maintenant",
+    ctaHref: "#",
+    isPlaylist: true,
+    isVideo: false,
+    videoUrl: ""
+  },
+  {
+    type: 'club',
+    title: "Nyege Nyege : dix ans de contre-feu culturel et d'infrabasses radicales",
+    image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1600&q=80",
+    ctaText: "Découvrir maintenant",
+    ctaHref: "/articles/nyege-nyege-pulse/",
+    isPlaylist: false,
+    isVideo: false,
+    videoUrl: ""
+  }
+];
+---
+
+<Layout 
+  title="Studio Média Culturel en Ligne | Musique, Séries & Créations"
+  hideTicker={true}
+>
+  <!-- 1. DYNAMIC HERO CAROUSEL ROTATING EVERY 5 SECONDS WITH INTEGRATED VIDEO PLAYER -->
+  <section 
+    id="hero-carousel" 
+    class="relative w-full h-[90vh] md:h-[95vh] bg-black overflow-hidden flex items-end justify-center pb-8 md:pb-12 select-none"
+  >
+    <!-- Background Image Layers -->
+    {heroSlides.map((slide, index) => (
+      <div 
+        class={`hero-slide-bg absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+          index === 0 ? 'opacity-100 z-1' : 'opacity-0 z-0 pointer-events-none'
+        }`}
+        data-slide-index={index}
+      >
+        <img 
+          src={slide.image} 
+          alt={slide.title}
+          class="w-full h-full object-cover object-center brightness-75"
+          loading={index === 0 ? "eager" : "lazy"}
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/35"></div>
+      </div>
+    ))}
+
+    <!-- In-Hero Integrated Video Player (Activé pour les slides vidéo ou au clic sur Regarder) -->
+    <div 
+      id="hero-video-player"
+      class="absolute inset-0 bg-black/95 z-30 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+    >
+      <button 
+        id="btn-close-hero-video"
+        class="absolute top-6 right-6 z-40 px-4 py-2 bg-[#e01a31] text-white hover:bg-white hover:text-black font-display text-xs font-black uppercase tracking-wider transition-colors flex items-center gap-2 cursor-pointer shadow-2xl"
+        aria-label="Fermer la vidéo"
+      >
+        <span>✕ Fermer la vidéo</span>
+      </button>
+
+      <div class="w-full max-w-4xl aspect-video mx-4 shadow-2xl relative border-2 border-white/10 bg-black">
+        <iframe 
+          id="hero-video-iframe" 
+          src="" 
+          class="w-full h-full" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- Center Play Button for Video Slides -->
+    <button 
+      id="hero-center-play-btn"
+      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-[#e01a31]/90 hover:bg-[#e01a31] text-white shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs hidden"
+      aria-label="Lancer la vidéo de la session"
+      title="Regarder la session"
+    >
+      <svg class="w-8 h-8 sm:w-10 sm:h-10 fill-current ml-1" viewBox="0 0 24 24">
+        <path d="M8 5v14l11-7z"/>
+      </svg>
+    </button>
+
+    <!-- Foreground Content Layer -->
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center space-y-4">
+      
+      <!-- Title & Adjacent CTA changing every 5 seconds (Badge texte supprimé) -->
+      <div class="space-y-4">
+        <h1 
+          id="hero-title"
+          class="font-display font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white tracking-tight leading-snug drop-shadow-md min-h-[3.2em] flex items-center justify-center transition-opacity duration-500"
+        >
+          <a id="hero-title-link" href={heroSlides[0].ctaHref} class="hover:text-[#e01a31] transition-colors">
+            {heroSlides[0].title}
+          </a>
+        </h1>
+
+        <!-- Adaptive CTA button right beside / under the title -->
+        <div class="flex items-center justify-center gap-3 pt-1">
+          <a 
+            id="hero-cta-btn"
+            href={heroSlides[0].ctaHref}
+            class="inline-flex items-center gap-2 px-6 py-2.5 bg-[#e01a31] text-white hover:bg-white hover:text-black font-display text-xs font-black uppercase tracking-wider transition-all duration-300 shadow-xl cursor-pointer"
+          >
+            <span id="hero-cta-label">{heroSlides[0].ctaText}</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dot Indicators & Scroll Chevron -->
+      <div class="flex flex-col items-center justify-center gap-2 pt-2">
+        <div class="flex items-center gap-2">
+          {heroSlides.map((_, index) => (
+            <button 
+              class={`hero-dot w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                index === 0 ? 'bg-white w-5' : 'bg-white/40 hover:bg-white/70'
+              }`}
+              data-dot-index={index}
+              aria-label={`Aller au slide ${index + 1}`}
+            ></button>
+          ))}
+        </div>
+
+        <a 
+          href="#articles-section" 
+          aria-label="Descendre aux articles" 
+          class="text-white hover:text-[#e01a31] transition-colors pt-1 animate-bounce cursor-pointer"
+        >
+          <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ARTICLES GRID (Captures 2 & 3 PAM - 3 Columns Clean Layout) -->
+  <section id="articles-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 bg-white">
+    <!-- Section Title: ARTICLES -->
+    <div class="mb-8 border-b-2 border-black/10 pb-3 flex items-center justify-between">
+      <h2 class="font-display font-black text-sm md:text-base uppercase tracking-wider text-black">
+        Articles
+      </h2>
+      <a href="/articles/" class="text-xs font-bold uppercase text-black/60 hover:text-[#e01a31] transition-colors">
+        Tous les articles ({allArticles.length})
+      </a>
+    </div>
+
+    <!-- 3-Column Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      {gridArticles.map((article) => (
+        <article class="flex flex-col justify-between group">
+          <div>
+            <!-- Image with clean aspect ratio -->
+            <a href={`/articles/${article.id}/`} class="block aspect-16/10 overflow-hidden bg-black/5 mb-3.5">
+              <img 
+                src={article.data.coverImage} 
+                alt={article.data.title}
+                class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                loading="lazy"
+              />
+            </a>
+
+            <!-- Subtitle/Category: ARTICLE (PAM style) -->
+            <span class="block text-[11px] font-sans font-semibold uppercase tracking-wider text-black/50 mb-1.5">
+              Article
+            </span>
+
+            <!-- Title: Bold black heading -->
+            <h3 class="font-display font-bold text-lg md:text-xl leading-snug text-black group-hover:text-[#e01a31] transition-colors mb-2.5">
+              <a href={`/articles/${article.id}/`}>
+                {article.data.title}
+              </a>
+            </h3>
+
+            <!-- Teaser snippet -->
+            <p class="text-xs md:text-sm text-black/75 font-sans leading-relaxed line-clamp-3">
+              {article.data.excerpt}
+            </p>
+          </div>
+
+          <!-- Author credit -->
+          <div class="mt-4 pt-2 text-xs font-sans text-black/50">
+            <span>par <strong class="text-black/80 font-medium">{article.data.author}</strong></span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Bouton Lire Plus d'Articles -->
+    <div class="mt-14 text-center pt-8 border-t border-black/10">
+      <a 
+        href="/articles/" 
+        class="inline-flex items-center gap-2 px-8 py-3.5 bg-black text-white hover:bg-[#e01a31] font-display text-xs font-black uppercase tracking-widest transition-colors shadow-md cursor-pointer"
+      >
+        <span>Lire plus d'articles</span>
+        <span>→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 3. DOSSIERS (Capture 4 PAM - Solid Red Section) -->
+  <section id="dossiers-section" class="w-full bg-[#e01a31] text-white py-14 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header with Arrows -->
+      <div class="flex items-center justify-between pb-6 mb-8 border-b border-white/20">
+        <h2 class="font-display font-black text-sm md:text-base uppercase tracking-wider text-white">
+          Dossiers
+        </h2>
+        <div class="flex items-center gap-3 text-white">
+          <button class="p-1 hover:text-black transition-colors cursor-pointer" aria-label="Précédent">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="p-1 hover:text-black transition-colors cursor-pointer" aria-label="Suivant">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2 Large Side-by-Side Cards (Exact PAM Capture 4) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Card 1 -->
+        <a href="/articles/kinshasa-bruits-futurs/" class="group relative aspect-16/10 md:aspect-16/9 overflow-hidden bg-black block shadow-xl">
+          <img 
+            src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=1200&q=80" 
+            alt="Abidjan, ça dort pas la nuit"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-85"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8">
+            <h3 class="font-display font-black text-xl md:text-2xl text-white group-hover:text-[#fff1d9] transition-colors leading-tight mb-2">
+              Abidjan, ça dort pas la nuit
+            </h3>
+            <span class="text-xs italic text-white/80 font-sans">
+              Par Leo Montaz & Camille Millerand
+            </span>
+          </div>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="/articles/nyege-nyege-pulse/" class="group relative aspect-16/10 md:aspect-16/9 overflow-hidden bg-black block shadow-xl">
+          <img 
+            src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=1200&q=80" 
+            alt="Afropollination"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-85"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8">
+            <h3 class="font-display font-black text-xl md:text-2xl text-white group-hover:text-[#fff1d9] transition-colors leading-tight mb-2">
+              Afropollination : explosions créatives dans l’underground global
+            </h3>
+            <span class="text-xs italic text-white/80 font-sans">
+              Par Christian Askin
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Bouton Voir Plus de Dossiers -->
+      <div class="mt-12 text-center">
+        <a 
+          href="/formats/" 
+          class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#e01a31] hover:bg-black hover:text-white font-display text-xs font-black uppercase tracking-widest transition-colors shadow-md cursor-pointer"
+        >
+          <span>Voir tous les dossiers & formats</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HISTOIRE & SÉRIES (Capture 4 & 5 PAM continuation) -->
+  <section id="histoire-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 bg-white">
+    <div class="mb-8 border-b-2 border-black/10 pb-3 flex items-center justify-between">
+      <h2 class="font-display font-black text-sm md:text-base uppercase tracking-wider text-black">
+        Histoire
+      </h2>
+      <a href="/articles/?category=Séries" class="text-xs font-bold uppercase text-black/60 hover:text-[#e01a31] transition-colors">
+        Toutes les séries
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+      {sortedArticles.slice(3, 6).map((article) => (
+        <article class="flex flex-col justify-between group">
+          <div>
+            <a href={`/articles/${article.id}/`} class="block aspect-16/10 overflow-hidden bg-black/5 mb-3.5">
+              <img 
+                src={article.data.coverImage} 
+                alt={article.data.title}
+                class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500"
+                loading="lazy"
+              />
+            </a>
+            <span class="block text-[11px] font-sans font-semibold uppercase tracking-wider text-black/50 mb-1.5">
+              Histoire
+            </span>
+            <h3 class="font-display font-bold text-lg md:text-xl leading-snug text-black group-hover:text-[#e01a31] transition-colors mb-2.5">
+              <a href={`/articles/${article.id}/`}>
+                {article.data.title}
+              </a>
+            </h3>
+            <p class="text-xs md:text-sm text-black/75 font-sans leading-relaxed line-clamp-3">
+              {article.data.excerpt}
+            </p>
+          </div>
+          <div class="mt-4 pt-2 text-xs font-sans text-black/50">
+            <span>par <strong class="text-black/80 font-medium">{article.data.author}</strong></span>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Bouton Voir Plus d'Histoires -->
+    <div class="mt-14 text-center pt-8 border-t border-black/10">
+      <a 
+        href="/articles/" 
+        class="inline-flex items-center gap-2 px-8 py-3.5 bg-black text-white hover:bg-[#e01a31] font-display text-xs font-black uppercase tracking-widest transition-colors shadow-md cursor-pointer"
+      >
+        <span>Lire plus d'articles historiques</span>
+        <span>→</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 5. MOLOLO SESSION (Ex-Pam Meets - Performances Live, Acoustiques & Rencontres) -->
+  <section id="mololo-session-section" class="w-full bg-[#e01a31] text-white py-14 px-4 sm:px-6 lg:px-8 border-t-2 border-black">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Section Header -->
+      <div class="flex items-center justify-between pb-6 mb-8 border-b border-white/20">
+        <div>
+          <h2 class="font-display font-black text-base md:text-lg uppercase tracking-wider text-white">
+            Mololo Session
+          </h2>
+          <span class="text-xs text-white/80 font-sans tracking-wide">
+            Performances live, studio & rencontres acoustiques
+          </span>
+        </div>
+        <div class="flex items-center gap-3 text-white">
+          <button class="p-1 hover:text-black transition-colors cursor-pointer" aria-label="Précédent">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button class="p-1 hover:text-black transition-colors cursor-pointer" aria-label="Suivant">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2 Large Meets Cards (Style PAM) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Meets Card 1 -->
+        <a href="/articles/angell-mutoni-kigali/" class="group relative aspect-16/10 md:aspect-16/9 overflow-hidden bg-black block shadow-xl">
+          <img 
+            src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80" 
+            alt="Jupiter & Okwess @Coachella"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-85"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8">
+            <span class="inline-block px-2.5 py-0.5 bg-black/60 text-white font-mono text-[10px] uppercase tracking-wider w-fit mb-2">
+              Session Live #01
+            </span>
+            <h3 class="font-display font-black text-xl md:text-2xl text-white group-hover:text-[#fff1d9] transition-colors leading-tight mb-2">
+              Jupiter & Okwess en session exclusive
+            </h3>
+            <span class="text-xs italic text-white/80 font-sans">
+              de Florent de la Tullaye
+            </span>
+          </div>
+        </a>
+
+        <!-- Meets Card 2 -->
+        <a href="/articles/fela-heritage-lagos/" class="group relative aspect-16/10 md:aspect-16/9 overflow-hidden bg-black block shadow-xl">
+          <img 
+            src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80" 
+            alt="Joshua Baraka @Kampala"
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-85"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent flex flex-col justify-end p-6 md:p-8">
+            <span class="inline-block px-2.5 py-0.5 bg-black/60 text-white font-mono text-[10px] uppercase tracking-wider w-fit mb-2">
+              Session Live #02
+            </span>
+            <h3 class="font-display font-black text-xl md:text-2xl text-white group-hover:text-[#fff1d9] transition-colors leading-tight mb-2">
+              Joshua Baraka @Kampala en acoustique
+            </h3>
+            <span class="text-xs italic text-white/80 font-sans">
+              de Marion Desmaret
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Bouton Voir Plus de Sessions -->
+      <div class="mt-12 text-center">
+        <a 
+          href="/formats/session/" 
+          class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-[#e01a31] hover:bg-black hover:text-white font-display text-xs font-black uppercase tracking-widest transition-colors shadow-md cursor-pointer"
+        >
+          <span>Découvrir toutes les sessions Mololo</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. NEWSLETTER BANNER (Déplacé après Mololo Session avant le footer selon demande) -->
+  <Newsletter />
+</Layout>
+
+<!-- Client Script for 5-Second Automated Carousel Rotation & Video Player -->
+<script define:vars={{ heroSlides }}>
+  let currentSlide = 0;
+  const totalSlides = heroSlides.length;
+
+  const bgLayers = document.querySelectorAll('.hero-slide-bg');
+  const titleLink = document.getElementById('hero-title-link');
+  const ctaBtn = document.getElementById('hero-cta-btn');
+  const ctaLabel = document.getElementById('hero-cta-label');
+  const dots = document.querySelectorAll('.hero-dot');
+  const centerPlayBtn = document.getElementById('hero-center-play-btn');
+  const videoPlayerContainer = document.getElementById('hero-video-player');
+  const videoIframe = document.getElementById('hero-video-iframe');
+  const btnCloseVideo = document.getElementById('btn-close-hero-video');
+
+  let carouselTimer = null;
+  let isVideoPlaying = false;
+
+  function showSlide(index) {
+    if (isVideoPlaying) return;
+
+    currentSlide = (index + totalSlides) % totalSlides;
+    const slide = heroSlides[currentSlide];
+
+    // Fade backgrounds
+    bgLayers.forEach((layer, i) => {
+      if (i === currentSlide) {
+        layer.classList.remove('opacity-0', 'pointer-events-none');
+        layer.classList.add('opacity-100', 'z-1');
+      } else {
+        layer.classList.remove('opacity-100', 'z-1');
+        layer.classList.add('opacity-0', 'pointer-events-none');
+      }
+    });
+
+    // Toggle center play button for video slides
+    if (centerPlayBtn) {
+      if (slide.isVideo) {
+        centerPlayBtn.classList.remove('hidden');
+      } else {
+        centerPlayBtn.classList.add('hidden');
+      }
+    }
+
+    // Update title
+    if (titleLink) {
+      titleLink.style.opacity = '0';
+      setTimeout(() => {
+        titleLink.textContent = slide.title;
+        titleLink.href = slide.ctaHref;
+        titleLink.style.opacity = '1';
+      }, 200);
+    }
+
+    // Update CTA button
+    if (ctaLabel && ctaBtn) {
+      ctaLabel.style.opacity = '0';
+      setTimeout(() => {
+        ctaLabel.textContent = slide.ctaText;
+        ctaBtn.href = slide.ctaHref;
+        ctaLabel.style.opacity = '1';
+      }, 200);
+    }
+
+    // Update dots
+    dots.forEach((dot, i) => {
+      if (i === currentSlide) {
+        dot.classList.remove('bg-white/40', 'w-2');
+        dot.classList.add('bg-white', 'w-5');
+      } else {
+        dot.classList.remove('bg-white', 'w-5');
+        dot.classList.add('bg-white/40', 'w-2');
+      }
+    });
+  }
+
+  function startCarousel() {
+    if (carouselTimer) clearInterval(carouselTimer);
+    carouselTimer = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 5000);
+  }
+
+  function stopCarousel() {
+    if (carouselTimer) {
+      clearInterval(carouselTimer);
+      carouselTimer = null;
+    }
+  }
+
+  function openHeroVideo() {
+    const slide = heroSlides[currentSlide];
+    const url = slide.videoUrl || "https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?autoplay=1";
+    if (videoIframe && videoPlayerContainer) {
+      isVideoPlaying = true;
+      stopCarousel();
+      videoIframe.src = url;
+      videoPlayerContainer.classList.remove('opacity-0', 'pointer-events-none');
+      videoPlayerContainer.classList.add('opacity-100', 'pointer-events-auto');
+    }
+  }
+
+  function closeHeroVideo() {
+    if (videoIframe && videoPlayerContainer) {
+      isVideoPlaying = false;
+      videoIframe.src = "";
+      videoPlayerContainer.classList.remove('opacity-100', 'pointer-events-auto');
+      videoPlayerContainer.classList.add('opacity-0', 'pointer-events-none');
+      startCarousel();
+    }
+  }
+
+  // Handle CTA button click
+  if (ctaBtn) {
+    ctaBtn.addEventListener('click', (e) => {
+      const slide = heroSlides[currentSlide];
+      if (slide.isVideo) {
+        e.preventDefault();
+        openHeroVideo();
+      } else if (slide.isPlaylist) {
+        e.preventDefault();
+        window.dispatchEvent(new CustomEvent('open-playlist-modal'));
+      }
+    });
+  }
+
+  if (centerPlayBtn) {
+    centerPlayBtn.addEventListener('click', openHeroVideo);
+  }
+
+  if (btnCloseVideo) {
+    btnCloseVideo.addEventListener('click', closeHeroVideo);
+  }
+
+  // Allow clicking on dots
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      stopCarousel();
+      showSlide(idx);
+      startCarousel();
+    });
+  });
+
+  // Start auto-rotation on page load
+  startCarousel();
+</script>

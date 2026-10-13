@@ -1,0 +1,105 @@
+---
+interface Props {
+  article: {
+    id: string;
+    data: {
+      title: string;
+      subtitle?: string;
+      format: string;
+      category: string;
+      author: string;
+      city: string;
+      publishDate: string;
+      readTime: string;
+      coverImage: string;
+      excerpt: string;
+      audioPreviewUrl?: string;
+      audioTitle?: string;
+    };
+  };
+}
+
+const { article } = Astro.props;
+---
+
+<article class="relative bg-[#fff1d9] border-b-2 border-black grid grid-cols-1 lg:grid-cols-12 group overflow-hidden">
+  <!-- Image Side (Col 1-7 on desktop) -->
+  <div class="lg:col-span-7 relative min-h-[380px] md:min-h-[500px] lg:min-h-[580px] overflow-hidden border-b lg:border-b-0 lg:border-r-2 border-black">
+    <img 
+      src={article.data.coverImage} 
+      alt={article.data.title}
+      class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden"></div>
+    
+    <!-- Format Badge Overlay on Photo -->
+    <div class="absolute top-4 left-4 z-10 flex flex-wrap gap-2">
+      <span class="bg-[#e01a31] text-white font-display text-xs md:text-sm font-extrabold uppercase px-3 py-1.5 tracking-wider shadow-md">
+        {article.data.format}
+      </span>
+      <span class="bg-black text-[#fff1d9] font-sans text-xs font-bold uppercase px-2.5 py-1.5 tracking-wider">
+        {article.data.city}
+      </span>
+    </div>
+
+    {article.data.audioPreviewUrl && (
+      <div class="absolute bottom-4 left-4 z-10 flex items-center gap-2 bg-black/85 backdrop-blur-sm text-white px-3 py-2 border border-white/20">
+        <span class="w-2.5 h-2.5 rounded-full bg-[#e01a31] animate-pulse"></span>
+        <span class="text-xs font-display font-semibold truncate max-w-[220px]">
+          {article.data.audioTitle || 'Écouter l\'extrait'}
+        </span>
+      </div>
+    )}
+  </div>
+
+  <!-- Content Side (Col 8-12 on desktop) -->
+  <div class="lg:col-span-5 p-6 md:p-10 lg:p-12 flex flex-col justify-between bg-[#fff1d9]">
+    <div class="space-y-4 md:space-y-6">
+      <div class="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-[#e01a31]">
+        <span>{article.data.category}</span>
+        <span class="text-black/30">•</span>
+        <span class="text-black/60">{article.data.readTime} de lecture</span>
+      </div>
+
+      <h1 class="font-display font-black text-2xl md:text-4xl lg:text-5xl leading-[1.08] tracking-tight text-black group-hover:text-[#e01a31] transition-colors">
+        <a href={`/articles/${article.id}`}>
+          {article.data.title}
+        </a>
+      </h1>
+
+      {article.data.subtitle && (
+        <p class="text-sm md:text-base font-semibold text-black/80 leading-snug italic">
+          {article.data.subtitle}
+        </p>
+      )}
+
+      <p class="text-sm md:text-base text-black/85 leading-relaxed font-normal">
+        {article.data.excerpt}
+      </p>
+    </div>
+
+    <!-- Editorial Footer of the Card -->
+    <div class="mt-8 pt-6 border-t border-black/20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-black text-[#fff1d9] flex items-center justify-center font-display font-bold text-xs uppercase">
+          {article.data.author.substring(0, 2)}
+        </div>
+        <div>
+          <span class="block text-xs font-bold uppercase text-black">Par {article.data.author}</span>
+          <span class="block text-[11px] text-black/50 font-medium">Publié le {article.data.publishDate}</span>
+        </div>
+      </div>
+
+      <a 
+        href={`/articles/${article.id}`} 
+        class="inline-flex items-center gap-2 px-4 py-2 bg-black text-[#fff1d9] font-display text-xs font-bold uppercase tracking-wider group-hover:bg-[#e01a31] group-hover:text-white transition-colors"
+      >
+        <span>Lire l'Article</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>

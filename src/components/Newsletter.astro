@@ -1,0 +1,51 @@
+---
+import Logo from './Logo.astro';
+---
+
+<!-- PAM Newsletter Section (Red Edition) -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+  <div class="bg-[#e01a31] text-white p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-md">
+    
+    <!-- Left: Logo + Newsletter Title (Exact PAM style) -->
+    <div class="flex items-center gap-4">
+      <Logo variant="white" size="md" />
+      <span class="font-display font-bold text-xl md:text-2xl tracking-tight text-white">
+        Newsletter
+      </span>
+    </div>
+
+    <!-- Right: Form with underline input & S'INSCRIRE button -->
+    <form id="pam-newsletter-form" class="w-full md:w-auto flex-1 max-w-xl flex flex-col sm:flex-row items-center gap-4">
+      <div class="w-full flex-1">
+        <input 
+          type="email" 
+          required
+          placeholder="Adresse email"
+          class="w-full bg-transparent border-b-2 border-white text-white placeholder:text-white/70 py-2 px-1 text-sm md:text-base focus:outline-none focus:border-black font-sans"
+        />
+      </div>
+      <button 
+        type="submit"
+        class="w-full sm:w-auto px-6 py-2.5 bg-black text-white hover:bg-white hover:text-[#e01a31] font-display text-xs font-black uppercase tracking-widest transition-colors cursor-pointer shrink-0"
+      >
+        S'inscrire
+      </button>
+    </form>
+
+    <div id="pam-newsletter-success" class="hidden text-xs font-bold bg-white text-[#e01a31] px-4 py-2">
+      ✓ Merci ! Vous êtes bien inscrit(e).
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('pam-newsletter-form');
+  const success = document.getElementById('pam-newsletter-success');
+  if (form && success) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.classList.add('hidden');
+      success.classList.remove('hidden');
+    });
+  }
+</script>

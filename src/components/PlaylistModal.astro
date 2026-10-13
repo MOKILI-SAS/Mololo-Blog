@@ -1,0 +1,146 @@
+---
+// Modal de sélection de plateforme de streaming pour MOLOLO playlist
+---
+
+<div 
+  id="mololo-playlist-modal" 
+  class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm hidden opacity-0 transition-opacity duration-300"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="playlist-modal-title"
+>
+  <!-- Modal Card (Exact Design from uploaded screenshot) -->
+  <div class="relative w-full max-w-md bg-[#e01a31] text-white p-6 sm:p-8 rounded-2xl shadow-2xl text-center space-y-6 transform scale-95 transition-transform duration-300 border border-white/20">
+    
+    <!-- Close Button (Top right) -->
+    <button 
+      id="close-playlist-modal"
+      class="absolute top-4 right-4 p-2 text-white/80 hover:text-white transition-colors cursor-pointer"
+      aria-label="Fermer la fenêtre"
+    >
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+
+    <!-- Curator Circular Avatar -->
+    <div class="flex justify-center pt-2">
+      <div class="relative w-24 h-24 rounded-full overflow-hidden border-2 border-white/30 shadow-lg bg-black">
+        <img 
+          src="/images/slimito-avatar.png" 
+          alt="SLIMITO - MOLOLO playlist"
+          class="w-full h-full object-cover"
+        />
+      </div>
+    </div>
+
+    <!-- Title & Description (Exact wording from screenshot) -->
+    <div class="space-y-2.5">
+      <h2 id="playlist-modal-title" class="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">
+        MOLOLO playlist
+      </h2>
+      <p class="text-xs sm:text-sm text-white/95 font-sans leading-relaxed max-w-sm mx-auto">
+        Des artistes à découvrir ou redécouvrir, des titres à écouter ou réécouter du 243 à 242. Une sélection exclusive signée SLIMITO.
+      </p>
+    </div>
+
+    <!-- Platform Buttons (Pill buttons with white outline & 3 dots on right) -->
+    <div class="space-y-3 pt-2">
+      <!-- Spotify Button -->
+      <a 
+        href="https://open.spotify.com/playlist/0Rj2DV5GbYSqlC8vXXtApS?pi=p02mVUWXSgW1I"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group flex items-center justify-between w-full py-3.5 px-6 rounded-full border border-white text-white hover:bg-white hover:text-[#e01a31] transition-all font-display font-bold text-sm tracking-wide shadow-sm"
+      >
+        <span class="w-4"></span>
+        <span class="flex-1 text-center">Spotify</span>
+        <!-- 3 Vertical dots (as shown in screenshot) -->
+        <span class="text-white/80 group-hover:text-[#e01a31] font-mono text-xs">⋮</span>
+      </a>
+
+      <!-- Apple Music Button -->
+      <a 
+        href="https://music.apple.com/cd/playlist/mololo-playlist/pl.u-jV890dkTDyEbNAX?l=fr-FR&ls"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group flex items-center justify-between w-full py-3.5 px-6 rounded-full border border-white text-white hover:bg-white hover:text-[#e01a31] transition-all font-display font-bold text-sm tracking-wide shadow-sm"
+      >
+        <span class="w-4"></span>
+        <span class="flex-1 text-center">Apple music</span>
+        <span class="text-white/80 group-hover:text-[#e01a31] font-mono text-xs">⋮</span>
+      </a>
+    </div>
+
+    <!-- Direct Embedded Player Option -->
+    <div class="pt-2">
+      <button 
+        id="btn-play-in-site"
+        class="text-xs font-mono underline uppercase tracking-wider text-white/80 hover:text-white transition-colors cursor-pointer"
+      >
+        ▶ Écouter directement sur le site
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const modal = document.getElementById('mololo-playlist-modal');
+  const closeBtn = document.getElementById('close-playlist-modal');
+  const playInSiteBtn = document.getElementById('btn-play-in-site');
+
+  function openModal() {
+    if (modal) {
+      modal.classList.remove('hidden');
+      setTimeout(() => {
+        modal.classList.remove('opacity-0');
+        modal.querySelector('div')?.classList.remove('scale-95');
+      }, 10);
+    }
+  }
+
+  function closeModal() {
+    if (modal) {
+      modal.classList.add('opacity-0');
+      modal.querySelector('div')?.classList.add('scale-95');
+      setTimeout(() => {
+        modal.classList.add('hidden');
+      }, 300);
+    }
+  }
+
+  // Attach global trigger for openModal
+  window.addEventListener('open-playlist-modal', () => {
+    openModal();
+  });
+
+  document.querySelectorAll('[data-open-playlist-modal]').forEach((el) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
+
+  if (playInSiteBtn) {
+    playInSiteBtn.addEventListener('click', () => {
+      closeModal();
+      window.dispatchEvent(new CustomEvent('toggle-spotify-player'));
+    });
+  }
+</script>

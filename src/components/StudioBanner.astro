@@ -1,0 +1,73 @@
+---
+import Logo from './Logo.astro';
+---
+
+<section class="border-b-2 border-black bg-black text-[#fff1d9] py-14 md:py-20 px-4 md:px-8 relative overflow-hidden">
+  <!-- Subtle decorative geometric background pattern -->
+  <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#fff1d9_1px,transparent_1px)] [background-size:24px_24px]"></div>
+
+  <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+    <div class="lg:col-span-7 space-y-6">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#e01a31] text-white font-display text-xs font-extrabold uppercase tracking-widest">
+        <span>Le Studio Mololo</span>
+      </div>
+
+      <h2 class="font-display font-black text-3xl md:text-5xl text-[#fff1d9] leading-[1.08] tracking-tight">
+        L'amplificateur des cultures africaines contemporaines.
+      </h2>
+
+      <p class="text-sm md:text-base text-[#fff1d9]/80 leading-relaxed font-sans max-w-2xl">
+        Blog Mololo est plus qu'un média : c'est un studio de création éditorial, sonore et visuel indépendant. Nous documentons l'effervescence des mégapoles du continent et de leurs diasporas, depuis Kinshasa jusqu'à Londres, de Dakar à Paris.
+      </p>
+
+      <!-- 3 piliers du studio -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-white/15">
+        <div class="border-l-2 border-[#e01a31] pl-3">
+          <span class="block font-display font-bold text-sm text-[#fff1d9]">Création Originale</span>
+          <span class="block text-xs text-[#fff1d9]/60 mt-0.5">Sessions live, documentaires & podcasts haute fidélité.</span>
+        </div>
+        <div class="border-l-2 border-[#e01a31] pl-3">
+          <span class="block font-display font-bold text-sm text-[#fff1d9]">Curations & Nuits</span>
+          <span class="block text-xs text-[#fff1d9]/60 mt-0.5">Scènes clubbing, résidences et programmations d'impact.</span>
+        </div>
+        <div class="border-l-2 border-[#e01a31] pl-3">
+          <span class="block font-display font-bold text-sm text-[#fff1d9]">Partenariats Culturels</span>
+          <span class="block text-xs text-[#fff1d9]/60 mt-0.5">Collaborations sur-mesure pour institutions et marques.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side: Contact / Pitch Card -->
+    <div class="lg:col-span-5 bg-[#fff1d9] text-black p-6 md:p-8 border-2 border-[#e01a31] shadow-2xl space-y-5">
+      <div class="flex items-center justify-between pb-4 border-b border-black/15">
+        <span class="font-display font-extrabold text-xs uppercase tracking-wider text-[#e01a31]">
+          Collaborer avec le Studio
+        </span>
+        <Logo variant="dark" size="sm" />
+      </div>
+
+      <p class="text-xs md:text-sm text-black/85 font-medium leading-relaxed">
+        Vous êtes artiste, producteur, festival, label ou acteur culturel ? Proposez un projet, une session live ou une coproduction avec nos équipes.
+      </p>
+
+      <div class="space-y-3 pt-2">
+        <a 
+          href="/contact"
+          class="flex items-center justify-center gap-2 w-full py-3.5 bg-[#e01a31] text-white font-display text-xs font-bold uppercase tracking-wider hover:bg-black transition-colors"
+        >
+          <span>Échanger avec l'équipe Studio</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+
+        <a 
+          href="/a-propos"
+          class="flex items-center justify-center gap-2 w-full py-3 bg-transparent border border-black text-black font-display text-xs font-bold uppercase tracking-wider hover:bg-black hover:text-[#fff1d9] transition-colors"
+        >
+          <span>Découvrir le Manifeste Complet</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

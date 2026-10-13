@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 220" width="840" height="220">
+      <rect width="840" height="220" rx="16" fill="#e01a31" />
+      <g transform="translate(40, 53)">
+        
+  <!-- M (3 vertical bars, middle bar shorter at bottom) -->
+  <rect x="0.00" y="0" width="22.94" height="113.75" fill="#ffffff" />
+  <rect x="47.76" y="0" width="22.94" height="91.91" fill="#ffffff" />
+  <rect x="95.52" y="0" width="22.94" height="113.75" fill="#ffffff" />
+  <!-- O1 -->
+  <path fill="#ffffff" fill-rule="evenodd" d="M 200.16 0.29 A 56.59 56.59 0 1 0 200.16 113.46 A 56.59 56.59 0 1 0 200.16 0.29 Z M 200.16 21.84 A 35.03 35.03 0 1 1 200.16 91.91 A 35.03 35.03 0 1 1 200.16 21.84 Z" />
+  <!-- L1 -->
+  <rect x="281.85" y="0" width="22.94" height="113.75" fill="#ffffff" />
+  <!-- O2 -->
+  <path fill="#ffffff" fill-rule="evenodd" d="M 386.49 0.29 A 56.59 56.59 0 1 0 386.49 113.46 A 56.59 56.59 0 1 0 386.49 0.29 Z M 386.49 21.84 A 35.03 35.03 0 1 1 386.49 91.91 A 35.03 35.03 0 1 1 386.49 21.84 Z" />
+  <!-- L2 -->
+  <rect x="468.19" y="0" width="22.94" height="113.75" fill="#ffffff" />
+  <!-- O3 -->
+  <path fill="#ffffff" fill-rule="evenodd" d="M 572.83 0.29 A 56.59 56.59 0 1 0 572.83 113.46 A 56.59 56.59 0 1 0 572.83 0.29 Z M 572.83 21.84 A 35.03 35.03 0 1 1 572.83 91.91 A 35.03 35.03 0 1 1 572.83 21.84 Z" />
+
+      </g>
+      
+        <!-- Text Descriptor Badge -->
+        <g transform="translate(680, 75)">
+          <rect x="0" y="0" width="135" height="48" rx="6" fill="#ffffff" />
+          <text x="67.5" y="32" font-family="'Unbounded', 'Exo', sans-serif" font-weight="900" font-size="20" fill="#e01a31" text-anchor="middle" letter-spacing="3">EPISODE</text>
+        </g>
+      
+    </svg>

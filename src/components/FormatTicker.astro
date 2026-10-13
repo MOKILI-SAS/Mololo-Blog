@@ -1,0 +1,45 @@
+---
+const formats = [
+  { name: 'MOLOLO SESSION', slug: 'session', tag: 'Live & Acoustique', color: 'bg-[#e01a31] text-white' },
+  { name: 'MOLOLO CLUB', slug: 'club', tag: 'Culture Club & Nuits', color: 'bg-black text-[#fff1d9]' },
+  { name: 'MOLOLO RADAR', slug: 'radar', tag: 'Talents Émergents', color: 'bg-[#e01a31] text-white' },
+  { name: 'MOLOLO NEWS', slug: 'news', tag: 'Dépêches & Actu', color: 'bg-black text-[#fff1d9]' },
+  { name: 'MOLOLO+', slug: 'plus', tag: 'Grands Entretiens', color: 'bg-[#e01a31] text-white' },
+  { name: 'MOLOLO EPISODE', slug: 'episode', tag: 'Docu & Podcasts', color: 'bg-black text-[#fff1d9]' },
+  { name: 'MOLOLO PLAYLIST', slug: 'playlist', tag: 'Curations Musicales', color: 'bg-[#e01a31] text-white' },
+  { name: 'MOLOLO ORIGINAL', slug: 'original', tag: 'Créations Studio', color: 'bg-black text-[#fff1d9]' },
+];
+---
+
+<div class="border-b-2 border-black bg-black text-[#fff1d9] overflow-hidden py-2.5">
+  <div class="flex items-center px-4 md:px-8">
+    <div class="hidden md:flex items-center gap-2 pr-4 border-r border-white/20 shrink-0">
+      <span class="w-2 h-2 bg-[#e01a31] rounded-full"></span>
+      <span class="font-display text-[10px] uppercase font-bold tracking-widest text-[#fff1d9]/70">Les 8 Formats :</span>
+    </div>
+    
+    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth whitespace-nowrap pl-2 md:pl-4 py-1">
+      {formats.map((f) => (
+        <a 
+          href={`/formats/${f.slug}`}
+          class="inline-flex items-center gap-2 px-3 py-1 border border-white/20 text-xs font-bold uppercase tracking-wider hover:border-[#e01a31] hover:bg-[#e01a31] hover:text-white transition-all group shrink-0"
+        >
+          <span class="font-display">{f.name}</span>
+          <span class="text-[9px] px-1.5 py-0.2 bg-white/10 group-hover:bg-white group-hover:text-black transition-colors rounded-xs opacity-80">
+            {f.tag}
+          </span>
+        </a>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>

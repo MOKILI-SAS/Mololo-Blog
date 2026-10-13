@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Logo from '../components/Logo.astro';
+---
+
+<Layout 
+  title="Le Studio Média & Manifeste Culturel | Blog Mololo"
+  description="Découvrez l'histoire, le manifeste culturel et les activités de production de Blog Mololo Studio."
+>
+  <!-- Hero Section -->
+  <section class="border-b-2 border-black bg-black text-[#fff1d9] py-16 md:py-24 px-4 md:px-8">
+    <div class="max-w-4xl mx-auto space-y-6 text-center">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-[#e01a31] text-white font-display text-xs font-bold uppercase tracking-widest">
+        <span>Manifeste & Mission</span>
+      </div>
+      <h1 class="font-display font-black text-3xl md:text-6xl text-[#fff1d9] tracking-tight leading-[1.08]">
+        Donner à la pulsation culturelle africaine l'écrin qu'elle mérite.
+      </h1>
+      <p class="text-base md:text-xl text-[#fff1d9]/80 font-sans leading-relaxed max-w-2xl mx-auto">
+        Blog Mololo est né d'un constat simple : la création contemporaine africaine dicte les tendances mondiales, mais ses récits intimes et complexes demeurent trop souvent sous-représentés.
+      </p>
+    </div>
+  </section>
+
+  <!-- Manifesto Body Section -->
+  <section class="max-w-4xl mx-auto px-4 md:px-8 py-16 space-y-12 bg-[#fff1d9]">
+    <div class="space-y-6 text-black leading-relaxed text-base md:text-lg font-sans">
+      <h2 class="font-display font-black text-2xl md:text-3xl text-black border-l-4 border-[#e01a31] pl-4">
+        1. Notre Philosophie : Le Temps Long & L'Exigence
+      </h2>
+      <p>
+        À rebours du flux effréné des réseaux sociaux et du piège du buzz éphémère, Blog Mololo revendique un journalisme culturel immersif, documenté et engagé. Nous nous inspirons des grands médias de référence et de l'énergie des fanzines indépendants pour bâtir des passerelles entre générations d'artistes.
+      </p>
+      <p>
+        Qu'il s'agisse de capturer une performance live brute dans un hangar de Bandalungwa, de retracer l'épopée politique de l'Afrobeat ou d'explorer les sound systems de Durban, nous privilégions la parole directe des créateurs, sans filtre paternaliste ni folklore réducteur.
+      </p>
+    </div>
+
+    <!-- The 3 Pillars -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-b border-black/20 py-10">
+      <div class="border-2 border-black p-6 bg-[#fff7ea] space-y-3">
+        <span class="font-display text-2xl font-black text-[#e01a31]">01</span>
+        <h3 class="font-display font-bold text-base text-black uppercase">Documentation</h3>
+        <p class="text-xs text-black/75 leading-relaxed">
+          Archiver et préserver les mémoires sonores et visuelles des mouvements alternatifs actuels pour les générations futures.
+        </p>
+      </div>
+      <div class="border-2 border-black p-6 bg-[#fff7ea] space-y-3">
+        <span class="font-display text-2xl font-black text-[#e01a31]">02</span>
+        <h3 class="font-display font-bold text-base text-black uppercase">Amplification</h3>
+        <p class="text-xs text-black/75 leading-relaxed">
+          Offrir aux talents émergents des mégapoles africaines un rayonnement international par le son et l'image.
+        </p>
+      </div>
+      <div class="border-2 border-black p-6 bg-[#fff7ea] space-y-3">
+        <span class="font-display text-2xl font-black text-[#e01a31]">03</span>
+        <h3 class="font-display font-bold text-base text-black uppercase">Coproduction</h3>
+        <p class="text-xs text-black/75 leading-relaxed">
+          Concevoir avec nos partenaires des documentaires, sessions et résidences respectant l'intégrité des artistes.
+        </p>
+      </div>
+    </div>
+
+    <!-- Studio Services & Booking -->
+    <div class="space-y-6">
+      <h2 class="font-display font-black text-2xl md:text-3xl text-black border-l-4 border-black pl-4">
+        2. Les Activités du Studio
+      </h2>
+      <p class="text-black/85 text-base">
+        En parallèle de notre travail éditorial en libre accès, le Studio Mololo met son savoir-faire et ses réseaux au service de projets ambitieux :
+      </p>
+      <ul class="space-y-3 text-sm md:text-base text-black/85 list-disc list-inside">
+        <li><strong>Captation audiovisuelle de Sessions Live</strong> (audio multicanal & cinéma mobile).</li>
+        <li><strong>Production de séries documentaires & podcasts natifs</strong> (narration bilingue FR/EN).</li>
+        <li><strong>Curation musicale & sound design</strong> pour marques, festivals et institutions.</li>
+        <li><strong>Organisation de soirées Mololo Club</strong> (résidences, sound systems, DJ sets exclusifs).</li>
+      </ul>
+    </div>
+
+    <!-- CTA Box -->
+    <div class="p-8 bg-black text-[#fff1d9] border-2 border-[#e01a31] flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="space-y-2 text-center md:text-left">
+        <h3 class="font-display font-black text-xl text-white">
+          Vous souhaitez co-construire avec nous ?
+        </h3>
+        <p class="text-xs text-[#fff1d9]/70 max-w-md">
+          Nos correspondants à Kinshasa, Dakar, Paris et Lagos étudient vos propositions éditoriales et projets de partenariats.
+        </p>
+      </div>
+      <a 
+        href="/contact"
+        class="px-6 py-3.5 bg-[#e01a31] text-white font-display text-xs font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-colors shrink-0"
+      >
+        Contacter le Studio
+      </a>
+    </div>
+  </section>
+</Layout>

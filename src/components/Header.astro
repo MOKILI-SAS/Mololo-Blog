@@ -1,0 +1,292 @@
+---
+import Logo from './Logo.astro';
+
+interface Props {
+  isHomeHero?: boolean;
+}
+
+const { isHomeHero = false } = Astro.props;
+---
+
+<!-- Sticky Header (PAM Red Edition - Hamburger formaté dans le coin droit) -->
+<header 
+  id="pam-header"
+  class={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+    isHomeHero 
+      ? 'bg-transparent text-white' 
+      : 'bg-[#e01a31] text-white shadow-md'
+  }`}
+  data-is-hero={isHomeHero ? 'true' : 'false'}
+>
+  <div class="w-full px-4 sm:px-6 lg:px-8 h-13 md:h-14 flex items-center justify-between relative">
+    
+    <!-- Left space -->
+    <div class="w-8"></div>
+
+    <!-- Center: Centered White MOLOLO Logo -->
+    <div class="absolute left-1/2 -translate-x-1/2 flex items-center">
+      <a href="/" class="flex items-center" aria-label="Accueil Blog Mololo">
+        <Logo variant="white" size="md" />
+      </a>
+    </div>
+
+    <!-- Right: Hamburger Button pinned cleanly to the right corner -->
+    <div class="absolute right-4 sm:right-6 lg:right-8 top-1/2 -translate-y-1/2 flex items-center">
+      <button 
+        id="pam-menu-btn"
+        class="p-2 -mr-2 text-white hover:opacity-80 transition-opacity focus:outline-none cursor-pointer flex items-center justify-center"
+        aria-label="Ouvrir le menu"
+      >
+        <div class="w-6 h-4 flex flex-col justify-between">
+          <span class="w-full h-0.5 bg-white rounded-xs"></span>
+          <span class="w-full h-0.5 bg-white rounded-xs"></span>
+          <span class="w-full h-0.5 bg-white rounded-xs"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Dimmed Backdrop Overlay -->
+  <div 
+    id="drawer-backdrop" 
+    class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 transition-opacity duration-300 opacity-0 pointer-events-none"
+  ></div>
+
+  <!-- Right-docked Side Drawer Navigation Menu (Exact PAM Capture Interface) -->
+  <aside 
+    id="pam-drawer" 
+    class="fixed inset-y-0 right-0 w-full sm:w-[420px] md:w-[460px] bg-[#e01a31] text-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out overflow-y-auto flex flex-col justify-between p-6 sm:p-8"
+    aria-label="Menu principal"
+  >
+    <div class="space-y-6">
+      <!-- Top Drawer Bar: Close X button (styled like PAM) -->
+      <div class="flex items-center justify-between pb-3">
+        <button 
+          id="pam-close-btn"
+          class="p-2 -ml-2 text-white hover:text-black transition-colors cursor-pointer"
+          aria-label="Fermer le menu"
+        >
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
+        <a href="/" aria-label="Accueil Blog Mololo" class="sm:hidden">
+          <Logo variant="white" size="sm" />
+        </a>
+      </div>
+
+      <!-- Search Bar Input (PAM style) -->
+      <div class="relative pb-2 border-b border-white/20">
+        <form action="/articles/" method="get" class="flex items-center">
+          <input 
+            type="text" 
+            name="q" 
+            placeholder="Recherche..." 
+            class="w-full bg-transparent text-white placeholder-white/70 text-lg font-sans font-medium focus:outline-none pr-8"
+          />
+          <button type="submit" class="text-white hover:text-black transition-colors" aria-label="Rechercher">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <!-- Follow Social Row (PAM style with official Mololo links) -->
+      <div class="flex items-center justify-between py-2 border-b border-white/20">
+        <span class="font-display font-bold text-base tracking-wide text-white">
+          Suivre
+        </span>
+        <div class="flex items-center gap-4 text-white">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/oyomololo" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors" aria-label="Facebook Mololo">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/oyomololo" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors" aria-label="Instagram Mololo">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+          <!-- Twitter / X -->
+          <a href="https://x.com/oyomololo" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors" aria-label="X Mololo">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@oyomololo" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors" aria-label="YouTube Mololo">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </a>
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@oyomololo" target="_blank" rel="noopener noreferrer" class="hover:text-black transition-colors" aria-label="TikTok Mololo">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.29 0 .58.04.86.11V9.4a6.33 6.33 0 0 0-.86-.06A6.34 6.34 0 0 0 3 15.68a6.34 6.34 0 0 0 10.82 4.48c.37-.37.67-.8.88-1.28V10.23a8.27 8.27 0 0 0 4.89 1.6V8.39a4.84 4.84 0 0 1-.0-.0v-1.7z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Main Navigation Links (Clean PAM Typography with Subcategories) -->
+      <nav class="space-y-4 pt-2 font-display font-black text-2xl sm:text-3xl tracking-tight">
+        
+        <!-- Articles Item with 2-Column Sublinks -->
+        <div class="border-b border-white/20 pb-4">
+          <a href="/articles/" class="block hover:text-black transition-colors">
+            Articles
+          </a>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-2 pt-2.5 font-sans font-medium text-sm text-white/90">
+            <a href="/articles/?category=Portraits" class="hover:underline hover:text-black transition-colors">Portraits</a>
+            <a href="/articles/?category=Chroniques" class="hover:underline hover:text-black transition-colors">Chroniques</a>
+            <a href="/articles/?category=Interviews" class="hover:underline hover:text-black transition-colors">Interviews</a>
+            <a href="/articles/?category=Séries" class="hover:underline hover:text-black transition-colors">Séries</a>
+          </div>
+        </div>
+
+        <!-- News -->
+        <div class="border-b border-white/20 pb-4">
+          <a href="/formats/news/" class="block hover:text-black transition-colors">
+            News
+          </a>
+        </div>
+
+        <!-- Vidéos / Mololo Session -->
+        <div class="border-b border-white/20 pb-4">
+          <a href="/formats/session/" class="block hover:text-black transition-colors">
+            Vidéos
+          </a>
+        </div>
+
+        <!-- Écouter / Playlist -->
+        <div class="border-b border-white/20 pb-4">
+          <button data-open-playlist-modal class="w-full text-left hover:text-black transition-colors cursor-pointer">
+            Écouter
+          </button>
+        </div>
+
+        <!-- Formats Mololo (8 formats officiels) -->
+        <div class="border-b border-white/20 pb-4">
+          <a href="/formats/" class="block hover:text-black transition-colors">
+            Formats Mololo
+          </a>
+          <div class="grid grid-cols-2 gap-x-4 gap-y-1.5 pt-2 font-sans font-medium text-xs text-white/80">
+            <a href="/formats/session/" class="hover:underline hover:text-black">Mololo Session</a>
+            <a href="/formats/club/" class="hover:underline hover:text-black">Mololo Club</a>
+            <a href="/formats/radar/" class="hover:underline hover:text-black">Mololo Radar</a>
+            <a href="/formats/news/" class="hover:underline hover:text-black">Mololo News</a>
+            <a href="/formats/plus/" class="hover:underline hover:text-black">Mololo+</a>
+            <a href="/formats/episode/" class="hover:underline hover:text-black">Mololo Episode</a>
+            <a href="/formats/playlist/" class="hover:underline hover:text-black">Mololo Playlist</a>
+            <a href="/formats/original/" class="hover:underline hover:text-black">Mololo Original</a>
+          </div>
+        </div>
+
+        <!-- Écosystème Mololo (Catalogue officiel des formats & branches) -->
+        <div class="border-b border-white/20 pb-4">
+          <a href="/ecosysteme/" class="flex items-center justify-between hover:text-black transition-colors group">
+            <span>Écosystème</span>
+            <span class="text-xs px-2.5 py-1 bg-white text-[#e01a31] font-display font-black uppercase tracking-wider group-hover:bg-black group-hover:text-white transition-colors shadow-sm">
+              Catalogue
+            </span>
+          </a>
+        </div>
+
+        <!-- Mololo+ Exclusif -->
+        <div class="border-b border-white/20 pb-4">
+          <a href="https://mololoplus.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between hover:text-black transition-colors">
+            <span>Mololo+</span>
+            <span class="text-xs px-2 py-0.5 bg-black text-white font-mono tracking-widest uppercase">VIP</span>
+          </a>
+        </div>
+
+        <!-- À propos -->
+        <div class="border-b border-white/20 pb-4">
+          <a href="/a-propos/" class="block hover:text-black transition-colors">
+            À propos
+          </a>
+        </div>
+
+        <!-- Rejoignez-nous ! -->
+        <div class="pb-2">
+          <a href="/contact/" class="block hover:text-black transition-colors">
+            Rejoignez-nous !
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Drawer Footer (Logo Mololo + Mentions + MOKILI) -->
+    <div class="pt-8 border-t border-white/20 space-y-3">
+      <div class="flex items-center justify-between">
+        <Logo variant="white" size="md" />
+        <a 
+          href="https://mokili.io" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="font-display font-extrabold text-xs text-white underline hover:text-black transition-colors"
+          title="Propulsé par MOKILI"
+        >
+          Propulsé par MOKILI
+        </a>
+      </div>
+      <p class="text-[10px] text-white/70 font-sans leading-tight">
+        © 2026 Blog Mololo Magazine — Studio média en ligne culturel. Tous droits réservés.
+      </p>
+    </div>
+  </aside>
+</header>
+
+<script>
+  // Menu Drawer toggle (Right-docked drawer with backdrop)
+  const menuBtn = document.getElementById('pam-menu-btn');
+  const closeBtn = document.getElementById('pam-close-btn');
+  const drawer = document.getElementById('pam-drawer');
+  const backdrop = document.getElementById('drawer-backdrop');
+  const header = document.getElementById('pam-header');
+
+  function openDrawer() {
+    if (!drawer || !backdrop) return;
+    backdrop.classList.remove('opacity-0', 'pointer-events-none');
+    backdrop.classList.add('opacity-100');
+    drawer.classList.remove('translate-x-full');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    if (!drawer || !backdrop) return;
+    drawer.classList.add('translate-x-full');
+    backdrop.classList.remove('opacity-100');
+    backdrop.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }
+
+  if (menuBtn) menuBtn.addEventListener('click', openDrawer);
+  if (closeBtn) closeBtn.addEventListener('click', closeDrawer);
+  if (backdrop) backdrop.addEventListener('click', closeDrawer);
+
+  // Close drawer on ESC key
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+
+  // Dynamic Scroll Behavior for Header on Hero
+  if (header && header.dataset.isHero === 'true') {
+    const handleScroll = () => {
+      if (window.scrollY > 80) {
+        header.classList.remove('bg-transparent');
+        header.classList.add('bg-[#e01a31]', 'shadow-md');
+      } else {
+        header.classList.remove('bg-[#e01a31]', 'shadow-md');
+        header.classList.add('bg-transparent');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+  }
+</script>

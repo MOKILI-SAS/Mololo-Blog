@@ -1,0 +1,47 @@
+---
+interface Props {
+  variant?: 'white' | 'dark' | 'red';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  class?: string;
+}
+
+const { variant = 'white', size = 'md', class: className = '' } = Astro.props;
+
+const sizeStyles = {
+  sm: 'h-5 w-auto',
+  md: 'h-7 w-auto',
+  lg: 'h-9 md:h-11 w-auto',
+  xl: 'h-12 md:h-16 w-auto',
+};
+
+const colorHex = {
+  white: '#ffffff',
+  dark: '#000000',
+  red: '#e01a31',
+}[variant];
+---
+
+<div class={`inline-flex items-center select-none ${className}`} title="Blog Mololo">
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    viewBox="0 0 630 114" 
+    class={`${sizeStyles[size]} transition-colors duration-200`}
+    fill={colorHex}
+    aria-label="Logo Mololo"
+  >
+    <!-- M : 3 barres verticales géométriques -->
+    <rect x="0.00" y="0" width="22.94" height="113.75" />
+    <rect x="47.76" y="0" width="22.94" height="91.91" />
+    <rect x="95.52" y="0" width="22.94" height="113.75" />
+    <!-- O1 -->
+    <path fill-rule="evenodd" d="M 200.16 0.29 A 56.59 56.59 0 1 0 200.16 113.47 A 56.59 56.59 0 1 0 200.16 0.29 Z M 200.16 21.85 A 35.03 35.03 0 1 1 200.16 91.91 A 35.03 35.03 0 1 1 200.16 21.85 Z" />
+    <!-- L1 -->
+    <rect x="281.86" y="0" width="22.94" height="113.75" />
+    <!-- O2 -->
+    <path fill-rule="evenodd" d="M 386.49 0.29 A 56.59 56.59 0 1 0 386.49 113.47 A 56.59 56.59 0 1 0 386.49 0.29 Z M 386.49 21.85 A 35.03 35.03 0 1 1 386.49 91.91 A 35.03 35.03 0 1 1 386.49 21.85 Z" />
+    <!-- L2 -->
+    <rect x="468.19" y="0" width="22.94" height="113.75" />
+    <!-- O3 -->
+    <path fill-rule="evenodd" d="M 572.83 0.29 A 56.59 56.59 0 1 0 572.83 113.47 A 56.59 56.59 0 1 0 572.83 0.29 Z M 572.83 21.85 A 35.03 35.03 0 1 1 572.83 91.91 A 35.03 35.03 0 1 1 572.83 21.85 Z" />
+  </svg>
+</div>
