@@ -2,29 +2,66 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Mentions Légales | Blog Mololo">
-  <div class="max-w-4xl mx-auto px-4 md:px-8 py-16 space-y-8 font-sans text-black">
-    <h1 class="font-display font-black text-3xl md:text-5xl text-black">
-      Mentions Légales
-    </h1>
+<Layout 
+  title="Mentions Légales & CGU | Blog Mololo"
+  description="Mentions légales obligatoires, éditeur, hébergeur et conditions générales d'utilisation de la plateforme média Blog Mololo."
+>
+  <div class="max-w-4xl mx-auto px-4 md:px-8 py-16 space-y-10 font-sans text-black">
+    <div class="border-b-2 border-black/10 pb-6">
+      <span class="text-xs font-mono uppercase tracking-widest text-[#e01a31] font-bold block mb-2">
+        Informations Légales & Réglementaires
+      </span>
+      <h1 class="font-display font-black text-3xl sm:text-5xl text-black uppercase tracking-tight">
+        Mentions Légales & CGU
+      </h1>
+      <p class="text-xs text-black/60 font-mono mt-2">Dernière mise à jour : 13 octobre 2026</p>
+    </div>
 
-    <div class="space-y-6 text-sm md:text-base leading-relaxed">
-      <section class="space-y-2">
+    <div class="space-y-8 text-sm md:text-base leading-relaxed text-black/85">
+      <section class="space-y-3">
         <h2 class="font-display font-bold text-xl text-black">1. Éditeur de la Plateforme</h2>
-        <p>Le site vitrine et média en ligne <strong>Blog Mololo</strong> est édité par Blog Mololo SAS, studio média culturel indépendant.</p>
-        <p>Directeur de la publication : Équipe de Direction Mololo Studio.</p>
-        <p>Contact : <a href="mailto:contact@mololo.media" class="text-[#e01a31] underline">contact@mololo.media</a></p>
+        <p>
+          Le présent site web <strong>Blog Mololo</strong> (accessible à l'adresse <code>https://mololo.media</code>) est édité par :<br />
+          <strong>MOKILI SAS / Blog Mololo Studio</strong><br />
+          Société par Actions Simplifiée au capital de 10 000 €<br />
+          Direction de la publication : Direction Éditoriale Blog Mololo Studio<br />
+          Email de contact légal : <a href="mailto:contact@mololo.media" class="text-[#e01a31] underline font-medium">contact@mololo.media</a>
+        </p>
       </section>
 
-      <section class="space-y-2">
-        <h2 class="font-display font-bold text-xl text-black">2. Conception & Réalisation</h2>
-        <p>Architecture, design et ingénierie logicielle réalisés sous le standard <strong>MOKILI Framework</strong>.</p>
-        <p><strong>Propulsé par MOKILI</strong> — <a href="https://mokili.io" target="_blank" rel="noopener noreferrer" class="text-[#e01a31] underline">https://mokili.io</a></p>
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">2. Hébergement de l'Infrastructure</h2>
+        <p>
+          La plateforme est hébergée sur une infrastructure réseau Edge distribuée et sécurisée conforme au profil d'hébergement H01 MOKILI :<br />
+          <strong>Hébergeur :</strong> Cloudflare Inc. / Vercel Inc. / Infrastructure Edge MOKILI<br />
+          Adresse : 101 Townsend St, San Francisco, CA 94107, USA<br />
+          Site officiel : <a href="https://cloudflare.com" target="_blank" rel="noopener noreferrer" class="text-[#e01a31] underline">https://cloudflare.com</a>
+        </p>
       </section>
 
-      <section class="space-y-2">
-        <h2 class="font-display font-bold text-xl text-black">3. Propriété Intellectuelle</h2>
-        <p>Tous les contenus, logos, enregistrements audios, captations vidéos et textes publiés sur Blog Mololo sont protégés par le droit d'auteur. Toute reproduction totale ou partielle sans accord préalable écrit est interdite.</p>
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">3. Architecture & Conception Technique</h2>
+        <p>
+          Design system, direction artistique et ingénierie logicielle conçus et propulsés sous le standard <strong>MOKILI Framework V1.1</strong>.<br />
+          <strong>Propulsé par MOKILI</strong> — Plateforme officielle : <a href="https://mokili.io" target="_blank" rel="noopener noreferrer" class="text-[#e01a31] underline font-bold">https://mokili.io</a>
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">4. Propriété Intellectuelle & Droits d'Auteur</h2>
+        <p>
+          L'intégralité des marques, logos, identités visuelles (MOLOLO SESSION, MOLOLO CLUB, MOLOLO RADAR, MOLOLO NEWS, MOLOLO+, MOLOLO EPISODE, MOLOLO PLAYLIST, MOLOLO ORIGINAL), enregistrements sonores, photographies et textes figurant sur Blog Mololo sont protégés par le droit de la propriété intellectuelle.
+        </p>
+        <p>
+          Toute reproduction, diffusion, extraction ou modification totale ou partielle de ces éléments sans l'accord préalable écrit exprès de Mololo Studio et de MOKILI SAS est strictement interdite et sanctionnée au titre de la contrefaçon.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">5. Conditions Générales d'Utilisation (CGU)</h2>
+        <p>
+          L'accès au site et son utilisation sont gratuits pour les contenus en libre consultation. L'utilisateur s'engage à utiliser le site dans le respect des lois en vigueur. Mololo Studio met en œuvre ses meilleurs efforts pour assurer l'exactitude des informations publiées mais ne saurait être tenu responsable d'éventuelles erreurs ou omissions.
+        </p>
       </section>
     </div>
   </div>

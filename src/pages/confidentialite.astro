@@ -2,26 +2,71 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Politique de Confidentialité | Blog Mololo">
-  <div class="max-w-4xl mx-auto px-4 md:px-8 py-16 space-y-8 font-sans text-black">
-    <h1 class="font-display font-black text-3xl md:text-5xl text-black">
-      Politique de Confidentialité
-    </h1>
+<Layout 
+  title="Politique de Confidentialité | Blog Mololo"
+  description="Politique de confidentialité et protection des données personnelles de Blog Mololo. Conformité RGPD, gestion des cookies et respect de la vie privée."
+>
+  <div class="max-w-4xl mx-auto px-4 md:px-8 py-16 space-y-10 font-sans text-black">
+    <div class="border-b-2 border-black/10 pb-6">
+      <span class="text-xs font-mono uppercase tracking-widest text-[#e01a31] font-bold block mb-2">
+        Protection des Données & RGPD
+      </span>
+      <h1 class="font-display font-black text-3xl sm:text-5xl text-black uppercase tracking-tight">
+        Politique de Confidentialité
+      </h1>
+      <p class="text-xs text-black/60 font-mono mt-2">Dernière mise à jour : 13 octobre 2026</p>
+    </div>
 
-    <div class="space-y-6 text-sm md:text-base leading-relaxed">
-      <section class="space-y-2">
-        <h2 class="font-display font-bold text-xl text-black">1. Respect de la vie privée</h2>
-        <p>Conformément aux principes de conception du Framework MOKILI, Blog Mololo n'utilise aucun traceur publicitaire intrusif, cookie tiers non consenti ou revente de données personnelles.</p>
+    <div class="space-y-8 text-sm md:text-base leading-relaxed text-black/85">
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">1. Engagement & Principes Fondamentaux</h2>
+        <p>
+          Conformément aux principes directeurs du <strong>Framework MOKILI V1.1</strong> et au Règlement Général sur la Protection des Données (RGPD 2016/679), <strong>Blog Mololo</strong> s’engage à protéger la vie privée de ses lecteurs et utilisateurs. Nous n’effectuons aucune vente de données personnelles, aucun profilage publicitaire intrusif et aucune transmission à des courtiers de données.
+        </p>
       </section>
 
-      <section class="space-y-2">
-        <h2 class="font-display font-bold text-xl text-black">2. Données collectées</h2>
-        <p>Les seules données traitées sont les adresses email fournies volontairement via le formulaire de newsletter du Cercle Mololo ou le formulaire de contact, à des fins exclusives de communication éditoriale et de réponse aux demandes.</p>
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">2. Responsable du Traitement</h2>
+        <p>
+          Le responsable du traitement des données personnelles est la société <strong>MOKILI SAS / Blog Mololo Studio</strong>.<br />
+          Contact référent protection des données (DPO) : <a href="mailto:contact@mololo.media" class="text-[#e01a31] underline font-medium">contact@mololo.media</a>
+        </p>
       </section>
 
-      <section class="space-y-2">
-        <h2 class="font-display font-bold text-xl text-black">3. Vos Droits</h2>
-        <p>Vous disposez à tout moment d'un droit d'accès, de rectification et de suppression de vos données personnelles en nous écrivant à <a href="mailto:contact@mololo.media" class="text-[#e01a31] underline">contact@mololo.media</a>.</p>
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">3. Données Collectées & Finalités</h2>
+        <p>
+          Nous ne recueillons que les données strictement nécessaires aux services demandés :
+        </p>
+        <ul class="list-disc pl-5 space-y-2 text-sm text-black/80">
+          <li><strong>Newsletter & Cercle Mololo :</strong> Adresse email collectée avec votre consentement explicite pour l’envoi de nos sélections éditoriales, sorties d’épisodes et exclusivités Mololo+.</li>
+          <li><strong>Formulaire de Contact :</strong> Nom, prénom, email et contenu du message afin de traiter vos demandes professionnelles, propositions de résidences ou partenariats médias.</li>
+          <li><strong>Données de Mesure d'Audience :</strong> Statistiques anonymisées et agrégées sans collecte d’adresses IP identifiables ni cookies tiers publicitaires.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">4. Durée de Conservation des Données</h2>
+        <p>
+          Les données relatives à la newsletter sont conservées tant que l’abonné ne se désinscrit pas (un lien de désabonnement instantané figure au bas de chaque communication). Les données issues des échanges de contact sont conservées pour une durée maximale de 24 mois après le dernier contact.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">5. Politique Relative aux Cookies</h2>
+        <p>
+          Le site Blog Mololo est conçu selon une architecture statique sobre (Jamstack / SSG). Il ne dépose aucun cookie publicitaire tiers. Seuls des traceurs techniques strictement nécessaires au fonctionnement de l’interface (comme le lecteur audio persistant) ou un outil d'analyse exempté de consentement peuvent être utilisés.
+        </p>
+      </section>
+
+      <section class="space-y-3">
+        <h2 class="font-display font-bold text-xl text-black">6. Vos Droits & Exercice des Droits</h2>
+        <p>
+          Conformément aux lois applicables, vous bénéficiez à tout moment des droits d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité de vos données personnelles.
+        </p>
+        <p>
+          Pour exercer ces droits, adressez simplement votre demande par email à : <a href="mailto:contact@mololo.media" class="text-[#e01a31] underline font-bold">contact@mololo.media</a>. Nous répondrons dans un délai maximal de 30 jours.
+        </p>
       </section>
     </div>
   </div>

@@ -1,0 +1,8 @@
+# Robots.txt — Blog Mololo (Studio Média Culturel en Ligne)
+# Framework MOKILI V1.1 — SEO Standard
+
+User-agent: *
+Allow: /
+
+# Sitemap Index
+Sitemap: https://mololo.media/sitemap.xml
