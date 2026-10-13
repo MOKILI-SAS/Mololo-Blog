@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-// Catalogue complet de l'écosystème Mololo extrait du document officiel "MOLOLO CHARTE & CO.pdf"
+// Catalogue complet de l'écosystème Mololo avec les logos officiels
 const ecosystemBranches = [
   {
     id: 'mololo-session',
@@ -10,7 +10,7 @@ const ecosystemBranches = [
     badge: 'Live & Acoustique',
     tagline: 'Le battement secret de la création live en studio',
     description: 'Sessions acoustiques intimistes, performances captées en conditions réelles et résidences artistiques éphémères dans les studios de Kinshasa, Dakar, Lagos et Paris.',
-    logoImage: '/images/ecosystem/mololo-session-red.png',
+    logoImage: '/images/ecosystem/mololo-session-card.png',
     link: '/formats/session/',
     external: false,
     ctaText: 'Explorer les Sessions Live',
@@ -23,7 +23,7 @@ const ecosystemBranches = [
     badge: 'Culture Club',
     tagline: 'Infrabasses, nuits électriques et avant-garde des dancefloors',
     description: 'Événements immersifs, DJ sets exclusifs, explorations des scènes clubbing hybrides (Amapiano, Batida, Gqom, Electro Chaabi, Singeli) et soirées itinérantes.',
-    logoImage: '/images/ecosystem/mololo-club-red.png',
+    logoImage: '/images/ecosystem/mololo-club-card.png',
     link: '/formats/club/',
     external: false,
     ctaText: 'Rejoindre le Club',
@@ -36,7 +36,7 @@ const ecosystemBranches = [
     badge: 'Talents Émergents',
     tagline: 'L’antenne avancée des voix qui feront demain',
     description: 'Défrichage et mise en lumière des talents bruts, producteurs méconnus et collectifs indépendants qui redéfinissent les contours de la pop et des musiques urbaines contemporaines.',
-    logoImage: '/images/ecosystem/mololo-radar-red.png',
+    logoImage: '/images/ecosystem/mololo-radar-card.png',
     link: '/formats/radar/',
     external: false,
     ctaText: 'Découvrir le Radar',
@@ -49,7 +49,7 @@ const ecosystemBranches = [
     badge: 'Journalisme Culturel',
     tagline: 'Chroniques, décryptages et récits engagés',
     description: 'Le regard critique et indépendant sur les industries créatives africaines : chroniques d’albums, enquêtes culturelles, interviews de fond et décryptages géopolitiques.',
-    logoImage: '/images/ecosystem/mololo-news-red.png',
+    logoImage: '/images/ecosystem/mololo-news-card.png',
     link: '/formats/news/',
     external: false,
     ctaText: 'Lire les Actualités',
@@ -62,7 +62,7 @@ const ecosystemBranches = [
     badge: 'Contenus Exclusifs',
     tagline: 'La plateforme VIP des rencontres d’exception',
     description: 'Accès privilégié aux grands entretiens filmés en 4K, masterclasses avec les pionniers de la culture, archives rares et avant-premières réservées aux membres du cercle.',
-    logoImage: '/images/ecosystem/mololo-plus-red.png',
+    logoImage: '/images/ecosystem/mololo-plus-card.png',
     link: 'https://mololoplus.com',
     external: true,
     ctaText: 'Accéder à Mololo+ (VIP)',
@@ -75,7 +75,7 @@ const ecosystemBranches = [
     badge: 'Séries & Podcasts',
     tagline: 'Récits sonores et feuilletons culturels au long cours',
     description: 'Séries narratives audio et vidéo, immersions documentaires et feuilletons thématiques explorant les grandes épopées musicales, les mouvements sociaux et l’art urbain.',
-    logoImage: '/images/ecosystem/mololo-episode-red.png',
+    logoImage: '/images/ecosystem/mololo-episode-card.png',
     link: '/formats/episode/',
     external: false,
     ctaText: 'Écouter les Épisodes',
@@ -88,7 +88,7 @@ const ecosystemBranches = [
     badge: 'Sélections Streaming',
     tagline: 'Curations sonores exclusives signées SLIMITO',
     description: 'La bande-son officielle de Mololo disponible en streaming continu sur Spotify et Apple Music. Une sélection exigeante de pépites du 243 au 242 et de toute la diaspora.',
-    logoImage: '/images/ecosystem/mololo-playlist-red.png',
+    logoImage: '/images/ecosystem/mololo-playlist-card.png',
     link: '/playlists/',
     external: false,
     ctaText: 'Écouter les Playlists',
@@ -101,7 +101,7 @@ const ecosystemBranches = [
     badge: 'Documentaires & Créations',
     tagline: 'Les grandes créations audiovisuelles du studio',
     description: 'Documentaires d’auteur, court-métrages musicaux, créations graphiques et films originaux coproduits par le studio Mololo et ses antennes internationales.',
-    logoImage: '/images/ecosystem/mololo-original-red.png',
+    logoImage: '/images/ecosystem/mololo-original-card.png',
     link: '/formats/original/',
     external: false,
     ctaText: 'Regarder les Originaux',
@@ -114,19 +114,12 @@ const ecosystemBranches = [
     badge: 'Le Cœur Créatif',
     tagline: 'L’agence de création, production & curation culturelle',
     description: 'Le studio indépendant qui conçoit, produit et diffuse l’ensemble des contenus médias, résidences et collaborations artistiques sous l’égide de MOKILI SAS.',
-    logoImage: '/images/ecosystem/mololo-studio-red.png',
+    logoImage: '/images/ecosystem/mololo-studio-card.png',
     link: '/a-propos/',
     external: false,
     ctaText: 'Découvrir le Studio',
     frequency: 'Permanent'
   }
-];
-
-const brandColors = [
-  { name: 'Rouge Écarlate', hex: '#e01a31', role: 'Vibration & Énergie primaire', bgClass: 'bg-[#e01a31]', textClass: 'text-white' },
-  { name: 'Toile de Lin / Crème', hex: '#fff1d9', role: 'Chaleur éditoriale & Matière', bgClass: 'bg-[#fff1d9]', textClass: 'text-black' },
-  { name: 'Noir Profond', hex: '#000000', role: 'Contraste, Structure & Fondations', bgClass: 'bg-black', textClass: 'text-white' },
-  { name: 'Blanc Pur', hex: '#ffffff', role: 'Clarté typographique & Épure', bgClass: 'bg-white', textClass: 'text-black border border-black/10' },
 ];
 ---
 
@@ -144,12 +137,12 @@ const brandColors = [
       </div>
 
       <h1 class="font-display font-black text-3xl sm:text-5xl md:text-6xl text-white tracking-tight leading-tight">
-        L'Écosystème Média <br />
-        <span class="text-[#e01a31]">Blog Mololo</span>
+        L'Écosystème <br />
+        <span class="text-[#e01a31]">Mololo</span>
       </h1>
 
       <p class="text-base sm:text-lg md:text-xl text-[#fff1d9]/80 font-sans max-w-3xl leading-relaxed">
-        Issu de la charte officielle Mololo, notre écosystème s’articule en un réseau interconnecté de formats spécialisés : de la ferveur live de <strong>Mololo Session</strong> à l’effervescence nocturne de <strong>Mololo Club</strong>, en passant par le défrichage de <strong>Mololo Radar</strong> et l’exclusivité de <strong>Mololo+</strong>.
+        Notre écosystème s’articule en un réseau interconnecté de formats spécialisés : de la ferveur live de <strong>Mololo Session</strong> à l’effervescence nocturne de <strong>Mololo Club</strong>, en passant par le défrichage de <strong>Mololo Radar</strong> et l’exclusivité de <strong>Mololo+</strong>.
       </p>
 
       <div class="pt-4 flex flex-wrap items-center gap-4 text-xs font-display font-bold uppercase tracking-wider">
@@ -159,16 +152,6 @@ const brandColors = [
         >
           <span>Parcourir le catalogue ({ecosystemBranches.length} branches)</span>
           <span>↓</span>
-        </a>
-
-        <a 
-          href="/MOLOLO CHARTE & CO.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="px-6 py-3 border border-white/30 text-white hover:border-[#e01a31] hover:bg-[#e01a31] hover:text-white transition-colors flex items-center gap-2"
-        >
-          <span>Consulter le Document Source (PDF)</span>
-          <span>↗</span>
         </a>
       </div>
     </div>
@@ -200,12 +183,12 @@ const brandColors = [
           class="group block bg-[#fff1d9] border-2 border-black hover:border-[#e01a31] p-6 sm:p-7 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between"
         >
           <div class="space-y-5">
-            <!-- Header de la carte : Logo de la branche -->
-            <div class="aspect-21/9 overflow-hidden bg-white border border-black/15 flex items-center justify-center p-3 relative shadow-inner">
+            <!-- Header de la carte : Logo officiel de la branche -->
+            <div class="aspect-2/1 overflow-hidden bg-black border border-black/20 flex items-center justify-center relative shadow-inner">
               <img 
                 src={branch.logoImage} 
                 alt={`Logo ${branch.name}`}
-                class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
               <span class="absolute top-2 right-2 px-2 py-0.5 bg-black text-white font-mono text-[9px] uppercase tracking-wider">
@@ -248,56 +231,6 @@ const brandColors = [
           </div>
         </a>
       ))}
-    </div>
-  </section>
-
-  <!-- 3. Charte Visuelle & Identité Graphique (Directement issue du document source) -->
-  <section class="bg-black text-white py-16 px-4 sm:px-6 lg:px-8 border-t-2 border-black">
-    <div class="max-w-6xl mx-auto space-y-12">
-      <div class="text-center space-y-3">
-        <span class="text-xs font-mono uppercase tracking-widest text-[#e01a31] font-bold">
-          Charte & Co • Standards Visuels
-        </span>
-        <h2 class="font-display font-black text-3xl sm:text-4xl uppercase tracking-tight text-white">
-          La Charte Graphique Mololo
-        </h2>
-        <p class="text-sm text-white/70 max-w-xl mx-auto font-sans">
-          Les fondements colorimétriques et typographiques qui cimentent l'ensemble des déclinaisons de l'écosystème.
-        </p>
-      </div>
-
-      <!-- Les 4 Couleurs Officielles -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-        {brandColors.map((color) => (
-          <div class="border-2 border-white/20 p-4 bg-white/5 space-y-3">
-            <div class={`h-20 sm:h-24 w-full rounded-none ${color.bgClass}`}></div>
-            <div>
-              <span class="text-xs font-mono font-bold block text-white/60 uppercase">{color.hex}</span>
-              <h4 class="font-display font-bold text-sm text-white">{color.name}</h4>
-              <p class="text-[11px] text-white/60 font-sans mt-0.5">{color.role}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <!-- Typographies Officielles -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-        <div class="border-2 border-white/20 p-6 bg-white/5 space-y-3">
-          <span class="px-2.5 py-0.5 bg-[#e01a31] text-white font-mono text-[10px] uppercase font-bold">Titraille & Display</span>
-          <h3 class="font-display font-black text-2xl text-white">Exo & Asgard Trial</h3>
-          <p class="text-xs text-white/75 font-sans leading-relaxed">
-            Typographie principale pour les gros titres, manifestes et formats de marque. Énergie contemporaine, géométrie affirmée et vibration africaine urbaine.
-          </p>
-        </div>
-
-        <div class="border-2 border-white/20 p-6 bg-white/5 space-y-3">
-          <span class="px-2.5 py-0.5 bg-black text-[#fff1d9] border border-white/20 font-mono text-[10px] uppercase font-bold">Accents & Badges</span>
-          <h3 class="font-display font-black text-2xl text-white">Unbounded & Mono</h3>
-          <p class="text-xs text-white/75 font-sans leading-relaxed">
-            Police géométrique moderne employée pour les compteurs, les badges de dates, les fréquences de parution et les chiffres des dossiers.
-          </p>
-        </div>
-      </div>
     </div>
   </section>
 
